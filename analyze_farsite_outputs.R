@@ -8,16 +8,16 @@ library(tidyterra)
 
 # 1. Load your FARSITE outputs
 # (Assuming you exported these as GeoTIFFs from FARSITE/FlamMap)
-flame_length <- rast("C:/Fire_sandbox/flame_lengths.tif")
-arr_time   <- rast("C:/Fire_sandbox/arrival_times.tif")
+flame_length <- rast("./farsite_sims/flame_lengths.tif")
+arr_time   <- rast("./farsite_sims/arrival_times.tif")
 
 arr_day<-1+(arr_time+1560) %/% 1440
 
-wind<-read_sf("C:/Fire_sandbox/wind_vectors.shp")
+wind<-read_sf("./farsite_sims/wind_vectors.shp")
 
 wind_raster <- rasterize(wind, flame_length, field = "mph", fun = mean)
 
-raw_wind <- read.table("C:/Fire_sandbox/weather_test_5.wxs", 
+raw_wind <- read.table("./farsite_sims/weather_test_5.wxs", 
                        skip = 3, 
                        header = TRUE)
 
